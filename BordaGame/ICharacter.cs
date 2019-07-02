@@ -14,8 +14,6 @@ namespace BordaGame
         int ManaPoint { get; set; }
         int AttackPoint { get; set; }
         int DefensePoint { get; set; }
-        int Level { get; set; }
-        int Experience { get; set; }
         List<SkillDelegate> Skills { get; set; }
 
         void BasicAttack(ICharacter c);

@@ -14,8 +14,6 @@ namespace BordaGame.Characters
             ManaPoint = 100;
             AttackPoint = 10;
             DefensePoint = 10;
-            Level = 1;
-            Experience = 0;
             SkillDelegate s1 = new SkillDelegate(BasicAttack);
             SkillDelegate s2 = new SkillDelegate(FirstSkill);
             SkillDelegate s3 = new SkillDelegate(SecondSkill);
@@ -29,8 +27,6 @@ namespace BordaGame.Characters
         public int ManaPoint { get; set; }
         public int AttackPoint { get; set; }
         public int DefensePoint { get; set; }
-        public int Level { get; set; }
-        public int Experience { get; set; }
         public string firstSkillName { get; set; }
         public string secondSkillName { get; set; }
         public List<SkillDelegate> Skills { get; set; }
