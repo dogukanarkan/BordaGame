@@ -95,10 +95,21 @@ namespace BordaGame
 
             SelectPersonCharacter();
             SelectComputerCharacter();
+
+            Console.WriteLine("\n");
+            GameCycle();
         }
 
         private void ContinueGame()
         {
+            GameCycle();
+        }
+
+        private void GameCycle()
+        {
+            CountDown(5);
+            Console.Clear();
+
 
         }
 
@@ -180,6 +191,16 @@ namespace BordaGame
         {
             int rand = new Random().Next(1, 11);
             _computer.Character = _computer.Deck[rand];
+        }
+
+        public void CountDown(int second)
+        {
+            for (int i = second; i > 0; i--)
+            {
+                Console.WriteLine($"New game will start in {i} seconds...");
+                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
+                Thread.Sleep(995);
+            }
         }
     }
 }
