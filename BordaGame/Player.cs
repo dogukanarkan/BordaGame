@@ -56,10 +56,24 @@ namespace BordaGame
             }
         }
 
+        private void CheckBattle()
+        {
+            if (Character.HealthPoint <= 0)
+            {
+                OnBattleFinish(EventArgs.Empty);
+            }
+        }
+
         public event EventHandler ThresholdReached;
         protected virtual void OnThresholdReached(EventArgs e)
         {
             ThresholdReached?.Invoke(this, e);
+        }
+
+        public event EventHandler BattleFinish;
+        protected virtual void OnBattleFinish(EventArgs e)
+        {
+            BattleFinish?.Invoke(this, e);
         }
     }
 }

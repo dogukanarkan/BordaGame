@@ -10,6 +10,7 @@ namespace BordaGame
 {
     public class Game
     {
+        private static bool _isFinish = false;
         private const int CHARACTERCOUNT = 4;
         private Person _person = new Person();
         private Computer _computer = new Computer();
@@ -22,12 +23,14 @@ namespace BordaGame
                             .ToList();
         private string _playersNameFile = "players.txt";
         private bool _hasPlayer = false;
-        private string PlayerName { get; set; }
+        public string PlayerName { get; set; }
 
         public void InitGame()
         {
-            _person.ThresholdReached += Person_ThresholdReached;
-            _computer.ThresholdReached += Computer_ThresholdReached;
+            _person.ThresholdReached += _person_ThresholdReached;
+            _person.BattleFinish += _person_BattleFinish;
+            _computer.ThresholdReached += _computer_ThresholdReached;
+            _computer.BattleFinish += _computer_BattleFinish;
             Console.WriteLine("Welcome to BordaGame!");
             Console.Write("Your nickname: ");
             PlayerName = Console.ReadLine();
@@ -37,12 +40,26 @@ namespace BordaGame
             Menu();
         }
 
-        private void Computer_ThresholdReached(object sender, EventArgs e)
+        private void _computer_BattleFinish(object sender, EventArgs e)
+        {
+            _isFinish = true;
+            _person.Win();
+            _computer.Lose();
+        }
+
+        private void _person_BattleFinish(object sender, EventArgs e)
+        {
+            _isFinish = true;
+            _person.Lose();
+            _computer.Win();
+        }
+
+        private void _computer_ThresholdReached(object sender, EventArgs e)
         {
             _computer.LevelUp();
         }
 
-        private void Person_ThresholdReached(object sender, EventArgs e)
+        private void _person_ThresholdReached(object sender, EventArgs e)
         {
             _person.LevelUp(this);
         }
@@ -121,7 +138,6 @@ namespace BordaGame
         {
             CountDown(5);
             Console.Clear();
-
 
         }
 
