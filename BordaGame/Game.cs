@@ -84,7 +84,14 @@ namespace BordaGame
 
         private void NewGame()
         {
+            Console.WriteLine($"Hello {PlayerName},");
+            Console.WriteLine("Now, you should choose 5 characters for game. These are whole characters:");
+            ListCharacters();
+            Console.WriteLine("You need to enter the name of characters that you want to choose.");
 
+            CreatePersonDeck(_person.Level);
+            CreateComputerDeck();
+            ListDeck();
         }
 
         private void ContinueGame()
@@ -118,6 +125,14 @@ namespace BordaGame
             } while (_person.Deck.Count < (CHARACTERCOUNT + level));
         }
 
+        private void CreateComputerDeck()
+        {
+            foreach (string item in _characterList)
+            {
+                _computer.Deck.Add(CharacterFactory.Build(item));
+            }
+        }
+
         private bool CheckCharacterName(string name)
         {
             return _characterList.Any(s => name.Contains(s));
@@ -126,6 +141,16 @@ namespace BordaGame
         public bool CheckDeck(string name)
         {
             return _person.Deck.Any(s => name.Contains(s.GetType().Name));
+        }
+
+        public void ListDeck()
+        {
+            Console.WriteLine("This is your deck:");
+            foreach (ICharacter item in _person.Deck)
+            {
+                Console.Write($"{item.GetType().Name} ");
+            }
+            Console.WriteLine();
         }
     }
 }
