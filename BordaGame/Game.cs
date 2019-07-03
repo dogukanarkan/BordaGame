@@ -26,6 +26,8 @@ namespace BordaGame
 
         public void InitGame()
         {
+            _person.ThresholdReached += Person_ThresholdReached;
+            _computer.ThresholdReached += Computer_ThresholdReached;
             Console.WriteLine("Welcome to BordaGame!");
             Console.Write("Your nickname: ");
             PlayerName = Console.ReadLine();
@@ -33,6 +35,16 @@ namespace BordaGame
             File.AppendAllText(_playersNameFile, PlayerName + Environment.NewLine);
 
             Menu();
+        }
+
+        private void Computer_ThresholdReached(object sender, EventArgs e)
+        {
+            _computer.LevelUp(this);
+        }
+
+        private void Person_ThresholdReached(object sender, EventArgs e)
+        {
+            _person.LevelUp(this);
         }
 
         private void Menu()

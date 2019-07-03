@@ -39,11 +39,27 @@ namespace BordaGame
         public void Win()
         {
             Experience += 100;
+            CheckLevel();
         }
 
         public void Lose()
         {
             Experience += 50;
+            CheckLevel();
+        }
+
+        private void CheckLevel()
+        {
+            if (Experience >= Threshold)
+            {
+                OnThresholdReached(EventArgs.Empty);
+            }
+        }
+
+        public event EventHandler ThresholdReached;
+        protected virtual void OnThresholdReached(EventArgs e)
+        {
+            ThresholdReached?.Invoke(this, e);
         }
     }
 }
