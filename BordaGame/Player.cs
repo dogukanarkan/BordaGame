@@ -20,5 +20,30 @@ namespace BordaGame
         public int Experience { get; set; }
         public List<ICharacter> Deck { get; set; }
         public ICharacter Character { get; set; }
+
+        public void LevelUp(Game game)
+        {
+            Threshold += 100;
+            Level++;
+            Experience %= 100;
+
+            foreach (ICharacter character in Deck)
+            {
+                character.HealthPoint += Level * 20;
+                character.ManaPoint += Level * 10;
+                character.AttackPoint += Level * 4;
+                character.DefensePoint += Level * 2;
+            }
+        }
+
+        public void Win()
+        {
+            Experience += 100;
+        }
+
+        public void Lose()
+        {
+            Experience += 50;
+        }
     }
 }
