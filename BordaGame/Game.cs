@@ -92,6 +92,9 @@ namespace BordaGame
             CreatePersonDeck(_person.Level);
             CreateComputerDeck();
             ListDeck();
+
+            SelectPersonCharacter();
+            SelectComputerCharacter();
         }
 
         private void ContinueGame()
@@ -151,6 +154,32 @@ namespace BordaGame
                 Console.Write($"{item.GetType().Name} ");
             }
             Console.WriteLine();
+        }
+
+        private void SelectPersonCharacter()
+        {
+            Console.Write("Which character do you want to play this game?: ");
+            string inputCharacter = Console.ReadLine();
+            while (!CheckDeck(inputCharacter))
+            {
+                Console.WriteLine("You don't have this character in your deck." +
+                    "Please enter the character that you have.");
+                ListDeck();
+
+                Console.Write("Which character do you want to play this game?: ");
+                inputCharacter = Console.ReadLine();
+            }
+
+            IEnumerable<ICharacter> selected = from character in _person.Deck
+                                               where character.GetType().Name.Equals(inputCharacter)
+                                               select character;
+            _person.Character = selected.Single();
+        }
+
+        private void SelectComputerCharacter()
+        {
+            int rand = new Random().Next(1, 11);
+            _computer.Character = _computer.Deck[rand];
         }
     }
 }
