@@ -39,7 +39,7 @@ namespace BordaGame
 
         private void Computer_ThresholdReached(object sender, EventArgs e)
         {
-            _computer.LevelUp(this);
+            _computer.LevelUp();
         }
 
         private void Person_ThresholdReached(object sender, EventArgs e)

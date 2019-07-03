@@ -21,13 +21,11 @@ namespace BordaGame
         public List<ICharacter> Deck { get; set; }
         public ICharacter Character { get; set; }
 
-        public void LevelUp(Game game)
+        public void LevelUp()
         {
             Threshold += 100;
             Level++;
             Experience %= 100;
-
-            UnlockNewCharacter(game);
 
             foreach (ICharacter character in Deck)
             {
@@ -36,22 +34,6 @@ namespace BordaGame
                 character.AttackPoint += Level * 4;
                 character.DefensePoint += Level * 2;
             }
-        }
-
-        private void UnlockNewCharacter(Game game)
-        {
-            Console.WriteLine("Your deck:");
-            game.ListDeck();
-            Console.WriteLine("Whole characters:");
-            game.ListCharacters();
-            Console.Write("You can choose new character. " +
-                "You should enter the character name that you want to choose: ");
-            string input = Console.ReadLine();
-            game.CreatePersonDeck(Level);
-            Console.WriteLine("\n");
-            Console.WriteLine("This is yours new deck:");
-            game.ListDeck();
-            game.CountDown(5);
         }
 
         public void Win()
