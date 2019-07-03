@@ -10,6 +10,13 @@ namespace BordaGame
 {
     public class Game
     {
+        private List<string> _characterList = AppDomain.CurrentDomain
+                            .GetAssemblies()
+                            .SelectMany(x => x.GetTypes())
+                            .Where(x => typeof(ICharacter)
+                            .IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
+                            .Select(x => x.Name)
+                            .ToList();
         private string _playersNameFile = "players.txt";
         private bool _hasPlayer = false;
         private string PlayerName { get; set; }
@@ -80,6 +87,15 @@ namespace BordaGame
         private void ContinueGame()
         {
 
+        }
+
+        public void ListCharacters()
+        {
+            int count = 1;
+            foreach (string item in _characterList)
+            {
+                Console.WriteLine($"{count++}. {item.ToString()}");
+            }
         }
     }
 }
