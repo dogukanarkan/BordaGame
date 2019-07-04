@@ -1,11 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BordaGame
 {
     public abstract class Player
     {
+
+        protected List<string> _characterList = AppDomain.CurrentDomain
+                            .GetAssemblies()
+                            .SelectMany(x => x.GetTypes())
+                            .Where(x => typeof(ICharacter)
+                            .IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
+                            .Select(x => x.Name)
+                            .ToList();
         public Player()
         {
             Threshold = 100;

@@ -11,7 +11,6 @@ namespace BordaGame
     public class Game
     {
         private static bool _isFinish = false;
-        private const int CHARACTERCOUNT = 4;
         private Person _person = new Person();
         private Computer _computer = new Computer();
         private List<string> _characterList = AppDomain.CurrentDomain
@@ -118,12 +117,12 @@ namespace BordaGame
             ListCharacters();
             Console.WriteLine("You need to enter the name of characters that you want to choose.");
 
-            CreatePersonDeck(_person.Level);
-            CreateComputerDeck();
-            ListDeck();
+            _person.CreateDeck();
+            _computer.CreateDeck();
+            _person.ListDeck();
 
-            SelectPersonCharacter();
-            SelectComputerCharacter();
+            _person.SelectCharacter();
+            _computer.SelectCharacter();
 
             Console.WriteLine("\n");
             GameCycle();
@@ -148,77 +147,6 @@ namespace BordaGame
             {
                 Console.WriteLine($"{count++}. {item.ToString()}");
             }
-        }
-
-        public void CreatePersonDeck(int level)
-        {
-            do
-            {
-                string input = Console.ReadLine();
-                if (CheckCharacterName(input) && !CheckDeck(input))
-                {
-                    _person.Deck.Add(CharacterFactory.Build(input));
-                    Console.WriteLine($"{input} added successfully.");
-                }
-                else
-                {
-                    Console.WriteLine("Please enter the character name again.");
-                }
-            } while (_person.Deck.Count < (CHARACTERCOUNT + level));
-        }
-
-        private void CreateComputerDeck()
-        {
-            foreach (string item in _characterList)
-            {
-                _computer.Deck.Add(CharacterFactory.Build(item));
-            }
-        }
-
-        private bool CheckCharacterName(string name)
-        {
-            return _characterList.Any(s => name.Contains(s));
-        }
-
-        public bool CheckDeck(string name)
-        {
-            return _person.Deck.Any(s => name.Contains(s.GetType().Name));
-        }
-
-        public void ListDeck()
-        {
-            Console.WriteLine("This is your deck:");
-            foreach (ICharacter item in _person.Deck)
-            {
-                Console.Write($"{item.GetType().Name} ");
-            }
-            Console.WriteLine();
-        }
-
-        private void SelectPersonCharacter()
-        {
-            Console.Write("Which character do you want to play this game?: ");
-            string inputCharacter = Console.ReadLine();
-            while (!CheckDeck(inputCharacter))
-            {
-                Console.WriteLine("You don't have this character in your deck." +
-                    "Please enter the character that you have.");
-                ListDeck();
-
-                Console.Write("Which character do you want to play this game?: ");
-                inputCharacter = Console.ReadLine();
-            }
-
-            IEnumerable<ICharacter> selected = from character in _person.Deck
-                                               where character.GetType().Name.Equals(inputCharacter)
-                                               select character;
-            _person.Character = selected.Single();
-        }
-
-        private void SelectComputerCharacter()
-        {
-            int rand = new Random().Next(1, 11);
-            _computer.Character = _computer.Deck[rand];
         }
 
         public void CountDown(int second)
