@@ -10,6 +10,17 @@ namespace BordaGame
         private const int CHARACTERCOUNT = 4;
         public Person() : base() { }
 
+        public override void Turn(Player computer)
+        {
+            int count = 0;
+            Console.WriteLine("\nYour Turn\n");
+            Console.WriteLine("What do you want to do?");
+            Character.Skills.ForEach(n => Console.WriteLine($"{++count}. {n.Method.Name}"));
+            Console.Write("Your choose: ");
+            int input = Convert.ToInt32(Console.ReadLine());
+            Character.Skills[input - 1].Invoke(computer.Character);
+        }
+
         public void LevelUp(Game game)
         {
             UnlockNewCharacter(game);

@@ -7,7 +7,6 @@ namespace BordaGame
 {
     public abstract class Player
     {
-
         protected List<string> _characterList = AppDomain.CurrentDomain
                             .GetAssemblies()
                             .SelectMany(x => x.GetTypes())
@@ -30,6 +29,7 @@ namespace BordaGame
         public List<ICharacter> Deck { get; set; }
         public ICharacter Character { get; set; }
 
+        public virtual void Turn(Player player) { }
         public void LevelUp()
         {
             Threshold += 100;

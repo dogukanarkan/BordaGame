@@ -8,6 +8,13 @@ namespace BordaGame
     {
         public Computer() : base() { }
 
+        public override void Turn(Player person)
+        {
+            Console.WriteLine("\nComputer's Turn\n");
+            int rand = new Random().Next(3);
+            Character.Skills[rand].Invoke(person.Character);
+        }
+
         public void SelectCharacter()
         {
             int rand = new Random().Next(1, 11);

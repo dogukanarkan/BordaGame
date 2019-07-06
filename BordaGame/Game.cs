@@ -138,6 +138,19 @@ namespace BordaGame
             CountDown(5);
             Console.Clear();
 
+            Player temp;
+            Queue<Player> turn = new Queue<Player>();
+            turn.Enqueue(_person);
+            turn.Enqueue(_computer);
+
+            while (!_isFinish)
+            {
+                Console.WriteLine($"Computer health: {_computer.Character.HealthPoint}");
+                Console.WriteLine($"Person health: {_person.Character.HealthPoint}");
+                temp = turn.Dequeue();
+                turn.Enqueue(temp);
+                temp.Turn(turn.Peek());
+            }
         }
 
         public void ListCharacters()
