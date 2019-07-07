@@ -13,6 +13,13 @@ namespace BordaGame
             Console.WriteLine("\nComputer's Turn\n");
             int rand = new Random().Next(3);
             Character.Skills[rand].Invoke(person.Character);
+            CheckBattle(person);
+        }
+
+        public override void Win()
+        {
+            Console.WriteLine("Computer won!");
+            base.Win();
         }
 
         public void SelectCharacter()

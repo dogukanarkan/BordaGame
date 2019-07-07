@@ -42,15 +42,15 @@ namespace BordaGame
         private void _computer_BattleFinish(object sender, EventArgs e)
         {
             _isFinish = true;
-            _person.Win();
-            _computer.Lose();
+            _computer.Win();
+            _person.Lose();
         }
 
         private void _person_BattleFinish(object sender, EventArgs e)
         {
             _isFinish = true;
-            _person.Lose();
-            _computer.Win();
+            _person.Win();
+            _computer.Lose();
         }
 
         private void _computer_ThresholdReached(object sender, EventArgs e)

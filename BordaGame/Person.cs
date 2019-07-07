@@ -19,12 +19,19 @@ namespace BordaGame
             Console.Write("Your choose: ");
             int input = Convert.ToInt32(Console.ReadLine());
             Character.Skills[input - 1].Invoke(computer.Character);
+            CheckBattle(computer);
         }
 
         public void LevelUp(Game game)
         {
             UnlockNewCharacter(game);
             LevelUp();
+        }
+
+        public override void Win()
+        {
+            Console.WriteLine("You won!");
+            base.Win();
         }
 
         private void UnlockNewCharacter(Game game)

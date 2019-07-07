@@ -30,6 +30,7 @@ namespace BordaGame
         public ICharacter Character { get; set; }
 
         public virtual void Turn(Player player) { }
+
         public void LevelUp()
         {
             Threshold += 100;
@@ -45,7 +46,7 @@ namespace BordaGame
             }
         }
 
-        public void Win()
+        public virtual void Win()
         {
             Experience += 100;
             CheckLevel();
@@ -65,9 +66,9 @@ namespace BordaGame
             }
         }
 
-        private void CheckBattle()
+        public void CheckBattle(Player player)
         {
-            if (Character.HealthPoint <= 0)
+            if (player.Character.HealthPoint <= 0)
             {
                 OnBattleFinish(EventArgs.Empty);
             }
