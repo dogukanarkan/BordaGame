@@ -65,28 +65,40 @@ namespace BordaGame
 
         private void Menu()
         {
-            Console.WriteLine("1. New Game");
+            int count = 0;
+            Console.WriteLine($"{++count}. New Game");
             if (_hasPlayer)
             {
-                Console.WriteLine("2. Continue");
+                Console.WriteLine($"{++count}. Continue");
             }
+            Console.WriteLine($"{++count}. Exit");
 
             string input = Console.ReadLine();
-            if (input.Equals("1"))
+            switch (input)
             {
-                NewGame();
-            }
-            else if (input.Equals("2"))
-            {
-                if (_hasPlayer)
-                {
-                    ContinueGame();
-                }
+                case "1":
+                    NewGame();
+                    break;
+                case "2":
+                    if (_hasPlayer)
+                    {
+                        ContinueGame();
+                    }
+                    Environment.Exit(0);
+                    break;
+                case "3":
+                    if (count == 3)
+                    {
+                        Environment.Exit(0);
+                    }
+                    goto default;
+                default:
+                    Console.Clear();
+                    Console.WriteLine("Please select one of the below options.");
+                    Menu();
+                    break;
             }
 
-            Console.Clear();
-            Console.WriteLine("Please select one of the below options.");
-            Menu();
         }
 
         private bool CheckNickname(string nickname)
