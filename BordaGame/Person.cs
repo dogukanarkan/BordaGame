@@ -25,8 +25,8 @@ namespace BordaGame
         public void LevelUp(Game game)
         {
             Console.WriteLine("Leveled up!");
-            UnlockNewCharacter(game);
             LevelUp();
+            UnlockNewCharacter(game);
         }
 
         public override void Win()
@@ -42,7 +42,6 @@ namespace BordaGame
             game.ListCharacters();
             Console.Write("You can choose new character. " +
                 "You should enter the character name that you want to choose: ");
-            string input = Console.ReadLine();
             CreateDeck();
             Console.WriteLine("\n");
             Console.WriteLine("This is yours new deck:");
