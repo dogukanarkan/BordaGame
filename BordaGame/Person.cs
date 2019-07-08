@@ -99,12 +99,12 @@ namespace BordaGame
 
         public bool CheckDeck(string name)
         {
-            return Deck.Any(s => name.Contains(s.GetType().Name));
+            return Deck.Any(s => name.Equals(s.GetType().Name));
         }
 
         private bool CheckCharacterName(string name)
         {
-            return _characterList.Any(s => name.Contains(s));
+            return _characterList.Any(s => name.Equals(s));
         }
     }
 }
