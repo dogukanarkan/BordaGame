@@ -34,18 +34,34 @@ namespace BordaGame.Characters
         public void BasicAttack(ICharacter c)
         {
             Console.WriteLine("Basic attack from Caitlyn.");
-            c.HealthPoint = c.HealthPoint + c.DefensePoint - AttackPoint;
+            int damage = AttackPoint - c.DefensePoint;
+            if (damage < 0)
+            {
+                damage = 0;
+            }
+            c.HealthPoint -= damage;
         }
+
         public void FirstSkill(ICharacter c)
         {
             Console.WriteLine($"First skill from Caitlyn and this skill name is {firstSkillName}");
-            c.HealthPoint = c.HealthPoint + c.DefensePoint - 20;
+            int damage = 20 - c.DefensePoint;
+            if (damage < 0)
+            {
+                damage = 0;
+            }
+            c.HealthPoint -= damage;
         }
 
         public void SecondSkill(ICharacter c)
         {
             Console.WriteLine($"Second skill from Caitlyn and this skill name is {secondSkillName}");
-            c.HealthPoint = c.HealthPoint + c.DefensePoint - (int)(c.HealthPoint * 0.3);
+            int damage = (int)(c.HealthPoint * 0.3) - c.DefensePoint;
+            if (damage < 0)
+            {
+                damage = 0;
+            }
+            c.HealthPoint -= damage;
         }
     }
 }
