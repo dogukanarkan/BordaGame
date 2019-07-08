@@ -24,7 +24,7 @@ namespace BordaGame
 
         public void SelectCharacter()
         {
-            int rand = new Random().Next(1, 11);
+            int rand = new Random().Next(10);
             Character = Deck[rand];
         }
 

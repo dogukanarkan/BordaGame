@@ -24,6 +24,7 @@ namespace BordaGame
 
         public void LevelUp(Game game)
         {
+            Console.WriteLine("Leveled up!");
             UnlockNewCharacter(game);
             LevelUp();
         }
@@ -36,7 +37,6 @@ namespace BordaGame
 
         private void UnlockNewCharacter(Game game)
         {
-            Console.WriteLine("Your deck:");
             ListDeck();
             Console.WriteLine("Whole characters:");
             game.ListCharacters();
